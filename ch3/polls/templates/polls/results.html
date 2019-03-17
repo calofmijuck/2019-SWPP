@@ -6,4 +6,11 @@
     {% endfor %}
 </ul>
 
+{% for choice in question.choice_set.all %}
+    <!-- <p> for each entry -->
+    {{ choice.choice_text|linebreaks|truncatewords:5 }}, counter: {{ forloop.counter }}
+    <!-- truncate words -->
+
+{% endfor %}
+<br><br>
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
