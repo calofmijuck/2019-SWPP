@@ -48,3 +48,11 @@ URL
 1. Model 코딩하기
 Book, Author, Publish Class 정의
 Admin 사이트에 보이도록 등록
+
+2. URLconf
+먼저 mysite/urls.py 에도 추가
+그리고 books/urls.py 에 추가
+
+Defined 7 urls
+그리고 각각 해당하는 클래스형 뷰 7개
+템플릿 파일도 7개 필요
