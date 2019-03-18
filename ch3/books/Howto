@@ -41,3 +41,10 @@ URL
 /books/ -> BooksModelView.as_view() -> index.html
 /books/book -> BookList.as_view() -> book_list.html
 /books/book/3/ -> BookDetail.as_view() -> book_detail.html
+
+
+위와 같은 방식으로 진행할 것.
+
+1. Model 코딩하기
+Book, Author, Publish Class 정의
+Admin 사이트에 보이도록 등록
