@@ -56,3 +56,22 @@ Admin 사이트에 보이도록 등록
 Defined 7 urls
 그리고 각각 해당하는 클래스형 뷰 7개
 템플릿 파일도 7개 필요
+
+3. Class 형 View 코딩하기
+TemplateView
+특별한 로직이 없고 템플릿 파일만을 렌더링 하는 경우
+필수적으로 template_name 클래스 variable 을 override 해줘야 함
+context 변수가 있는 경우 get_context_data 를 override
+
+ListView
+객체가 들어있는 리스트를 구성해서 이를 컨텍스트 변수로 템플릿 시스템에 넘겨준다
+모든 레코드를 가져오는 경우에는 모델 클래스명만 정해주면 됨
+- 기본값: 컨텍스트 변수로 object_list 사용
+템플릿 파일을 : 모델명소문자_list.html 로 생성
+
+DetailView
+특정 객체 하나를 컨텍스트 변수에 담아서 템플릿 시스템에 넘겨주면 되는 경우
+테이블에서 Primary Key 로 조회해서 특정 객체를 가져오는 경우에는 모델 클래스 명만 정해주면 된다
+pk의 값은 urlconf 에서 추출하여 뷰로 넘어온 parameter 사용
+-기본값: 컨텍스트 변수로 object 사용
+템플릿 파일 : 모델명소문자_detail.html
