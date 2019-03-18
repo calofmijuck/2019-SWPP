@@ -1,0 +1,43 @@
+Class 형 View 의 코딩이 간단한 점을 이용
+
+- Application 설계하기
+- 프로젝트 뼈대 만들기
+- Model
+- URLconf
+- View
+- Template
+
+순서로 진행한다.
+
+books: 책, 저자, 출판사의 정보를 관리하는, 정보를 보여주고 입력, 수정, 삭제할 수 있는 웹 앱
+
+먼저 UI 설계
+
+index.html - Book Management System
+book_list.html - Book list
+book_detail.html - Details of the book
+
+Book 테이블 설계를 먼저...
+id
+title
+author
+publisher
+publication date
+
+Author 테이블 설계
+id
+salutation
+name
+email
+
+Publisher 테이블 설계
+id
+name
+address
+website
+
+View의 흐름 설계
+URL
+/books/ -> BooksModelView.as_view() -> index.html
+/books/book -> BookList.as_view() -> book_list.html
+/books/book/3/ -> BookDetail.as_view() -> book_detail.html
