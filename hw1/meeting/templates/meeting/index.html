@@ -1,0 +1,9 @@
+{% if reserve_list %}
+    <ul>
+        {% for reserve in reserve_list %}
+        <li>{{ reserve.id }} : {{ reserve.created }}, {{ reserve.sinceWhen }} ~ {{ reserve.tilWhen }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No meetings exist currently.</p>
+{% endif %}
