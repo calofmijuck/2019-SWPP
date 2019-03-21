@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status, permissions
 
 class ReservationList(APIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, OwnerOnly)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
     def get(self, request, format = None):
         reserve = Reservation.objects.all()
@@ -22,10 +22,10 @@ class ReservationList(APIView):
         return Response(serializer.data, status = status.HTTP_400_BAD_REQUEST)
 
     def perform_create(self, serializer):
-        serializer.save(user = self.request.user)
+        serializer.save(owner = self.request.user)
 
 class ReservationDetail(APIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (OwnerOnly,)
     def get_object(self, pk):
         try:
             return Reservation.objects.get(pk = pk)
