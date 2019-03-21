@@ -16,7 +16,7 @@ class ReservationList(APIView):
 
     def post(self, request, format = None):
         serializer = ReservationSerializer(data = request.data)
-        if serializer.is_valid():
+        if serializer.validate(request.data) and serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.data, status = status.HTTP_400_BAD_REQUEST)
@@ -26,6 +26,7 @@ class ReservationList(APIView):
 
 class ReservationDetail(APIView):
     permission_classes = (OwnerOnly,)
+
     def get_object(self, pk):
         try:
             return Reservation.objects.get(pk = pk)
@@ -35,18 +36,22 @@ class ReservationDetail(APIView):
     def get(self, request, pk, format = None):
         reserve = self.get_object(pk)
         serializer = ReservationSerializer(reserve)
+        if request.user != reserve.user:
+            return Response(status = status.HTTP_403_FORBIDDEN)
         return Response(serializer.data)
 
     def put(self, request, pk, format = None):
         reserve = self.get_object(pk)
         serializer = ReservationSerializer(reserve, data = request.data)
-        if serializer.is_valid():
+        if serializer.validate(request.data) and serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format = None):
         reserve = self.get_object(pk)
+        if request.user != reserve.user:
+            return Response(status = status.HTTP_400_BAD_REQUEST)
         reserve.delete()
         return Response(status = status.HTTP_204_NO_CONTENT)
 
