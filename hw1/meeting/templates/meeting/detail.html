@@ -1,5 +1,6 @@
 <h1>Meeting id: {{ reserve.id }}</h1>
 
-{{ reserve.sinceWhen }} <br>
-{{ reserve.tilWhen }} <br>
-{{ reserve.created }}
+<b>From:</b> {{ reserve.sinceWhen }} <br>
+<b>To:</b> {{ reserve.tilWhen }} <br>
+<b>Reserved at:</b> {{ reserve.created }} <br>
+<b>Reserved by:</b> {{ reserve.user }}

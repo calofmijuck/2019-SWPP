@@ -11,6 +11,9 @@ class Reservation(models.Model):
     def __str__(self):
         return str(self.id)
 
+    class Meta:
+        ordering = ('created', )
+
 
 class User(models.Model):
     username = models.CharField(max_length = 50)
