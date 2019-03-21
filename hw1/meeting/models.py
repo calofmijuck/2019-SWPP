@@ -1,22 +1,16 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Reservation(models.Model):
     created = models.DateTimeField(auto_now_add = True)
     sinceWhen = models.DateTimeField()
     tilWhen = models.DateTimeField()
-    user = models.ForeignKey('User', on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, related_name="meetings", on_delete=models.CASCADE)
 
     def __str__(self):
         return str(self.id)
 
+
     class Meta:
         ordering = ('created', )
-
-
-class User(models.Model):
-    username = models.CharField(max_length = 50)
-
-    def __str__(self):
-        return self.username

@@ -1,8 +1,15 @@
+from django.conf.urls import include
 from django.urls import path
 from . import views
+from django.views.decorators.csrf import csrf_exempt
 
-app_name = 'meetings'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('<int:reservation_id>/', views.detail, name='detail'),
+    path('meetings/', views.ReservationList.as_view()),
+    path('meetings/<int:pk>/', views.ReservationDetail.as_view()),
+    path('users/', views.UserList.as_view()),
+    path('users/<int:pk>/', views.UserDetail.as_view()),
+]
+
+urlpatterns += [
+    path('api-auth/', include('rest_framework.urls')),
 ]

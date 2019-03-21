@@ -1,20 +1,16 @@
 from rest_framework import serializers
-from meeting.models import Reservation, User
+from .models import Reservation
+from django.contrib.auth.models import User
 
-class ReservationSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    created = serializers.DateTimeField()
-    sinceWhen = serializers.DateTimeField()
-    tilWhen = serializers.DateTimeField()
-    user = serializers.CharField()
+class ReservationSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source = 'owner.username')
+    class Meta:
+        model = Reservation
+        fields = ('id', 'created', 'sinceWhen', 'tilWhen', 'user', 'owner')
 
-    def create(self, validated_data):
-        return Reservation.objects.create(**validated_data)
+class UserSerializer(serializers.ModelSerializer):
+    meetings = serializers.PrimaryKeyRelatedField(many=True, queryset=Reservation.objects.all())
 
-    def update(self, instance, validated_data):
-        instance.created = validated_data.get('created', instance.created)
-        instance.sinceWhen = validated_data.get('sinceWhen', instance.sinceWhen)
-        instance.tilWhen = validated_data.get('tilWhen', instance.tilWhen)
-        instance.user = validated_data.get('user', instance.user)
-        instance.save()
-        return instance
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'meetings')
