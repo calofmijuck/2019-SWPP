@@ -23,7 +23,10 @@ http -v -a test:123 POST http://127.0.0.1:8000/meetings/ sinceWhen='2019-11-10T0
 http -v -a test2:123 POST http://127.0.0.1:8000/meetings/ sinceWhen='2019-11-10T09:00:00+09:00' tilWhen='2019-11-10T08:00:00+09:00'
 
 // Overlapping Times
-
+http -v -a test:123 POST http://127.0.0.1:8000/meetings/ sinceWhen='2019-11-10T17:00:00+09:00' tilWhen='2019-11-10T20:00:00+09:00'
+http -v -a test:123 POST http://127.0.0.1:8000/meetings/ sinceWhen='2019-11-10T16:00:00+09:00' tilWhen='2019-11-10T21:00:00+09:00'
+http -v -a test:123 POST http://127.0.0.1:8000/meetings/ sinceWhen='2019-11-10T18:00:00+09:00' tilWhen='2019-11-10T21:00:00+09:00'
+http -v -a test:123 POST http://127.0.0.1:8000/meetings/ sinceWhen='2019-11-10T16:00:00+09:00' tilWhen='2019-11-10T19:00:00+09:00'
 
 // GET meeting info by id
 http -v -a zx:123 GET http://127.0.0.1:8000/meetings/1/
@@ -65,6 +68,9 @@ http -v -a test:123 PUT http://127.0.0.1:8000/meetings/2/ sinceWhen='2019-10-10T
 http -v -a test2:123 PUT http://127.0.0.1:8000/meetings/3/ sinceWhen='2019-10-10T02:00:00+09:00' tilWhen='2018-10-10T10:00:00+09:00'
 
 // Overlapping Times
+http -v -a zx:123 PUT http://127.0.0.1:8000/meetings/4/ sinceWhen='2019-11-10T03:00:00+09:00' tilWhen='2019-11-10T04:00:00+09:00'
+http -v -a zx:123 PUT http://127.0.0.1:8000/meetings/4/ sinceWhen='2019-11-10T03:00:00+09:00' tilWhen='2019-11-10T06:00:00+09:00'
+http -v -a test:123 PUT http://127.0.0.1:8000/meetings/5/ sinceWhen='2019-11-10T03:00:00+09:00' tilWhen='2019-11-10T23:00:00+09:00'
 
 // DELETE meeting info
 http -v -a zx:123 DELETE http://127.0.0.1:8000/meetings/1/
@@ -95,3 +101,10 @@ http -v GET http://127.0.0.1:8000/users/
 http -v GET http://127.0.0.1:8000/users/1/
 http -v GET http://127.0.0.1:8000/users/2/
 http -v GET http://127.0.0.1:8000/users/3/
+
+
+// Incorrect form
+http -v -a zx:123 POST http://127.0.0.1:8000/meetings/ sinceWhen='2019-11-10T02:00:00+09:00' tilWhen='2019-1110T03:00:0009:0'
+
+// Datetime format
+YYYY-MM-DDThh:mm[:ss[.uuuuuu]][+HH:MM|-HH:MM|Z]
