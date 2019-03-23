@@ -1,6 +1,6 @@
-from django.conf.urls import include
 from django.urls import path
 from . import views
+from django.conf.urls import include
 
 urlpatterns = [
     path('meetings/', views.ReservationList.as_view()),
