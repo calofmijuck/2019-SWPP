@@ -15,7 +15,7 @@ class Login extends Component {
 
   componentDidMount() {
     if (this.state.logged_in) {
-      fetch('http://localhost:8000/token-auth/current_user', {
+      fetch('http://18.218.68.157:8000/current_user/', {
         headers: {
           Authorization: `JWT ${localStorage.getItem('token')}`
         }
@@ -29,7 +29,7 @@ class Login extends Component {
 
   handle_login = (e, data) => {
     e.preventDefault();
-    fetch('http://localhost:8000/token-auth/', {
+    fetch('http://18.218.68.157:8000/token-auth/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ class Login extends Component {
 
   handle_signup = (e, data) => {
     e.preventDefault();
-    fetch('http://localhost:8000/core/users/', {
+    fetch('http://18.218.68.157:8000/users/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
