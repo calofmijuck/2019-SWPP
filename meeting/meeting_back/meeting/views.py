@@ -13,7 +13,7 @@ def current_user(request):
     return Response(serializer.data)
 
 class ReservationList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
 
@@ -38,7 +38,7 @@ class ReservationList(generics.ListCreateAPIView):
 
 
 class ReservationDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, OwnerOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly, OwnerOnly,)
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
 
@@ -64,7 +64,7 @@ class ReservationDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class UserList(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
@@ -77,6 +77,6 @@ class UserList(generics.ListCreateAPIView):
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
