@@ -1,10 +1,16 @@
 from .models import Reservation, User
-from .serializers import ReservationSerializer, UserSerializer
+from .serializers import ReservationSerializer, UserSerializer, UserSerializerWithToken
 from .permissions import OwnerOnly
 from rest_framework.response import Response
 from rest_framework import status, permissions, generics
 from datetime import datetime
+from rest_framework.decorators import api_view
 
+
+@api_view(['GET'])
+def current_user(request):
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)
 
 class ReservationList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
@@ -61,6 +67,13 @@ class UserList(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = UserSerializerWithToken(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return self.create(request, *args, **kwargs)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):

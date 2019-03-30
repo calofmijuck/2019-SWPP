@@ -27,12 +27,21 @@ export const delMeeting = (id) => {
 
 export const POST_MEETING_REQUEST = 'POST_MEETING_REQUEST'
 
+export const FETCH_MEETINGS = 'FETCH_MEETINGS'
+
 export const postMeetingRequest = (sw, tw) => {
+    console.log(sw)
+    console.log(tw)
     return {
 	type: POST_MEETING_REQUEST,
 	// text
-    sinceWhen: sw,
-    tilWhen: tw,
+    sw, tw
     }
+}
 
+export const fetchMeetings = () => {
+    return {
+        type: FETCH_MEETINGS,
+
+    }
 }

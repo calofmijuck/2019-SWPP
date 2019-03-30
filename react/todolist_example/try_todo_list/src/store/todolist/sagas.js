@@ -19,5 +19,5 @@ export function* watchPostTodoRequest() {
 
 
 export default function* () {
-    yield fork(watchPostTodoRequest)    
+    yield fork(watchPostTodoRequest)
 }

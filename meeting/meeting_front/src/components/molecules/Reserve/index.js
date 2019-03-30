@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 `
 
 
-export const Reserve = ({ statefunction, onAdd, onPost }) => {
+export const Reserve = ({ statefunction, onAdd, onPost, onFetch }) => {
     let sw, tw;
     console.log(onAdd);
     console.log("Testing...");
@@ -31,12 +31,17 @@ export const Reserve = ({ statefunction, onAdd, onPost }) => {
         }
     };
 
+    const onLoad = () => {
+        onFetch();
+    }
+
     return (
         <div>
             Start : <input ref={sinceWhen => {sw = sinceWhen;}} /> <br/>
             End : <input ref={tilWhen => {tw = tilWhen;}} /><br/>
             <Button type="submit" onClick={onSubmit}>Reserve!</Button>
             <Button type="submit" onClick={onPut}>Post Meeting</Button>
+            <Button type="submit" onClick={onLoad}>Fetch Meetings</Button>
         </div>
     )
 }

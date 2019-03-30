@@ -39,11 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'meeting.apps.MeetingConfig',
     'rest_framework',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+	'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -130,3 +131,18 @@ CORS_ORIGIN_WHITELIST = (
     'ip_address',
 )
 CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {
+	'DEFAULT_PERMISSION_CLASSES': (
+		'rest_framework.permissions.IsAuthenticated',
+	),
+	'DEFAULT_AUTHENTICATION_CLASSES': (
+		'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+		'rest_framework.authentication.SessionAuthentication',
+		'rest_framework.authentication.BasicAuthentication',
+	),
+}
+
+JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'meeting.utils.my_jwt_response_handler'
+}
