@@ -1,9 +1,10 @@
-// https://github.com/diegohaz/arc/wiki/Atomic-Design
 import React from 'react'
+
+import { PageTemplate } from 'components'
 
 const HomePage = () => {
   return (
-    <div>Hello World</div>
+    <PageTemplate>Hello World</PageTemplate>
   )
 }
 

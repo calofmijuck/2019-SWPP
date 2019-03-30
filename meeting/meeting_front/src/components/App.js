@@ -1,10 +1,6 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import React, { PropTypes } from 'react'
 import { injectGlobal, ThemeProvider } from 'styled-components'
 
-import { HomePage } from 'components'
-
-// https://github.com/diegohaz/arc/wiki/Styling
 import theme from './themes/default'
 
 injectGlobal`
@@ -13,14 +9,16 @@ injectGlobal`
   }
 `
 
-const App = () => {
+const App = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
-      <Switch>
-        <Route path="/" component={HomePage} exact />
-      </Switch>
+      {children}
     </ThemeProvider>
   )
+}
+
+App.propTypes = {
+  children: PropTypes.any,
 }
 
 export default App
