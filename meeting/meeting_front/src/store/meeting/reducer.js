@@ -1,15 +1,5 @@
 import { initialState } from './selectors'
 
-const delMeeting = (t, action) => {
-    if(t.id !== action.id) {
-        return t
-    }
-    return {
-        ...t,
-        deleted: !t.deleted
-    }
-}
-
 const meeting_reducer = (state = initialState, action) => {
     switch(action.type) {
         case 'ADD_MEETING':
@@ -23,7 +13,7 @@ const meeting_reducer = (state = initialState, action) => {
                 }
             ]
         case 'DEL_MEETING':
-            return state.map(t => delMeeting(t, action))
+            return state
         case 'FETCH_SUCCEEDED':
             var arr = action.data
             var ret = []

@@ -13,9 +13,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onMeetingClick: (id, usr, pass) => {
-            dispatch(delMeeting(id, usr, pass))
-        }
     }
 }
 

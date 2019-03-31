@@ -8,8 +8,8 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-export const Reserve = ({ statefunction, onAdd, onPost, onFetch, onLogout }) => {
-    let sw, tw, usr, pass;
+export const Reserve = ({ statefunction, onAdd, onPost, onFetch, onLogout, onDelete }) => {
+    let sw, tw, usr, pass, del;
     var name = '';
     const onSubmit = () => {
         console.log('outer scope');
@@ -26,6 +26,7 @@ export const Reserve = ({ statefunction, onAdd, onPost, onFetch, onLogout }) => 
             onPost(sw.value, tw.value, usr.value, pass.value);
             sw.value = '';
             tw.value = '';
+            onFetch();
         }
     };
 
@@ -41,16 +42,24 @@ export const Reserve = ({ statefunction, onAdd, onPost, onFetch, onLogout }) => 
         onLogout();
     }
 
+    const onDel = () => {
+        onDelete(Number(del.value), usr.value, pass.value);
+        del.value = '';
+        onFetch();
+    }
+
     return (
         <div>
             ID: <input ref={usrname => {usr = usrname;}}/><br/>
             Pass: <input ref={passwd => {pass = passwd;}}/><br/>
-            <Button type="submit" onClick={onLoad}>Login</Button>
+            <Button type="submit" onClick={onLoad}>Login/Reload</Button>
             <Button type="submit" onClick={onExit}>Logout</Button><br/><br/>
             Start : <input ref={sinceWhen => {sw = sinceWhen;}} /> <br/>
             End : <input ref={tilWhen => {tw = tilWhen;}} /><br/>
             <Button type="submit" onClick={onSubmit}>Reserve!</Button>
-            <Button type="submit" onClick={onPut}>Post Meeting</Button><br/>
+            <Button type="submit" onClick={onPut}>Post Meeting</Button><br/><br/>
+            # to delete: <input ref={x => {del = x;}} />
+            <Button type="submit" onClick={onDel}>Delete</Button>
         </div>
     )
 }

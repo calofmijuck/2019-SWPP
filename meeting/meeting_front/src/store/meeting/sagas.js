@@ -25,6 +25,8 @@ export function* postMeeting(sw, tw, usr, pass) {
         }
         console.log(error)
     }
+    const data = yield call(api.get, url)
+    yield put({type: "FETCH_SUCCEEDED", data})
 }
 
 export function* fetchData() {
@@ -46,15 +48,20 @@ export function* deleteData(id, usr, pass) {
             'Content-Type': 'application/json; charset=utf-8'
         }
         yield call(api.delete, url + id + '/', {headers: headerParams})
-        console("Delete Success!")
     } catch (error) {
-        var s = error.toString()
-        s = Number(s.substring(7, 10))
+        var t = error.toString()
+        var s = Number(t.substring(7, 10))
         if(s == 403) {
             alert("Authentication is not done correctly. Please login again.")
+        } else if(s == 404){
+            alert("The meeting does not exist")
+        } else if(t.substring(0, 11) === "SyntaxError"){
+            alert("Deleted!")
         }
         console.log(error)
     }
+    const data = yield call(api.get, url)
+    yield put({type: "FETCH_SUCCEEDED", data})
 }
 
 export function* watchPostMeetingRequest() {
