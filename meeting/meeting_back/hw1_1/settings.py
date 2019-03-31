@@ -142,7 +142,3 @@ REST_FRAMEWORK = {
 		'rest_framework.authentication.BasicAuthentication',
 	),
 }
-
-JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'meeting.utils.my_jwt_response_handler'
-}
