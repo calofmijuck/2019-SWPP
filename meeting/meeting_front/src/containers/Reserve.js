@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { Reserve } from '../components/molecules/Reserve'
-import { addMeeting, postMeetingRequest, fetchMeetings } from '../store/meeting/actions'
+import { addMeeting, postMeetingRequest, fetchMeetings, reset } from '../store/meeting/actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -13,11 +13,18 @@ const mapDispatchToProps = (dispatch) => {
 	    onAdd: (sw, tw) => {
 	        dispatch(addMeeting(sw, tw))
 	    },
-	    onPost: (sw, tw) => {
-	        dispatch(postMeetingRequest(sw, tw))
+	    onPost: (sw, tw, usr, pass) => {
+	        dispatch(postMeetingRequest(sw, tw, usr, pass))
+            dispatch(fetchMeetings())
 	    },
         onFetch: () => {
             dispatch(fetchMeetings())
+        },
+        onLogin: (usr, pass) => {
+            dispatch(login(usr, pass))
+        },
+        onLogout: () => {
+            dispatch(reset())
         }
     }
 }

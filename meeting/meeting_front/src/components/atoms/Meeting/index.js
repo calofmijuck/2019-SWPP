@@ -9,9 +9,7 @@ const Styledli = styled.li`
 const Meeting = ({ onClick, sinceWhen, tilWhen, deleted }) => (
     <Styledli
         onClick={onClick}
-        style={{
-            textDecoration: deleted ? 'line-through' : 'none'
-        }}
+        style={{display: deleted ? 'none' : 'normal'}}
     >
         Reservation: { sinceWhen } ~ { tilWhen }
     </Styledli>

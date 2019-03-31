@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import { delMeeting } from '../store/meeting/actions'
 import { MeetingList } from '../components/molecules/MeetingList'
+import { fetchMeetings } from '../store/meeting/actions'
 
 const mapStateToProps = (state) => {
     console.log(state)
@@ -12,8 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onMeetingClick: (id) => {
-            dispatch(delMeeting(id))
+        onMeetingClick: (id, usr, pass) => {
+            dispatch(delMeeting(id, usr, pass))
         }
     }
 }
