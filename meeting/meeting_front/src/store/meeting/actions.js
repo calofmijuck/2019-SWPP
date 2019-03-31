@@ -42,6 +42,5 @@ export const postMeetingRequest = (sw, tw) => {
 export const fetchMeetings = () => {
     return {
         type: FETCH_MEETINGS,
-
     }
 }

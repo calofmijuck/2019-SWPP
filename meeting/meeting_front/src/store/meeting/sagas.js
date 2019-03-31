@@ -8,25 +8,22 @@ const url = 'http://18.218.68.157:8000/meetings/'
 
 export function* postMeeting(sw, tw) {
     console.log("Post")
-	console.log(sw)
-    console.log(tw)
-    console.log("Calling get")
-    const getdata = yield call(api.get, url)
-    console.log(getdata)
+	console.log(sw, tw)
     const data = yield call(api.post, url, {sinceWhen: sw, tilWhen: tw})
     console.log(data)
     // return data;
 }
 
-// export function* fetchData(action) {
-//     console.log("Fetching")
-//     try {
-//         const data = yield call(Api.fetchUser, action.payload.url)
-//         yield put({type: "FETCH_SUCCEEDED", data})
-//     } catch (error) {
-//         yield put({type: "FETCH_FAILED", error})
-//     }
-// }
+export function* fetchData() {
+    try {
+        console.log("Calling get")
+        const data = yield yield call(api.get, url)
+        console.log(data)
+        yield put({type: "FETCH_SUCCEEDED", data})
+    } catch (error) {
+        console.log("Fetch Failed")
+    }
+}
 
 export function* watchPostMeetingRequest() {
     while (true) {
@@ -36,15 +33,14 @@ export function* watchPostMeetingRequest() {
 }
 
 
-// function* watchFetchData() {
-//     // yield takeEvery('FETCH_REQUESTED', fetchData)
-//     while(true) {
-//         const { text } = yield take(actions.FETCH_MEETINGS)
-//         yield call(fetchData, text)
-//     }
-// }
+function* watchFetchData() {
+    while(true) {
+        const { text } = yield take(actions.FETCH_MEETINGS)
+        yield call(fetchData)
+    }
+}
 
 export default function* () {
     yield fork(watchPostMeetingRequest)
-    // yield fork(watchFetchData)
+    yield fork(watchFetchData)
 }

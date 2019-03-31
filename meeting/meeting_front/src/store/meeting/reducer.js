@@ -40,6 +40,16 @@ const meeting_reducer = (state = initialState, action) => {
         //     return state.map(t => editMeeting(t, action))
         case 'DEL_MEETING':
             return state.map(t => delMeeting(t, action))
+        case 'FETCH_SUCCEEDED':
+            console.log("Add to initialState")
+            var arr = action.data
+            var ret = [...state]
+            var i = 0;
+            for(; i < arr.length; ++i) {
+                ret.push(arr[i])
+            }
+            console.log(ret)
+            return ret
         default:
             return state;
     }
