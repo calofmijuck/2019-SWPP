@@ -4,11 +4,15 @@ import * as actions from './actions'
 
 
 const url = 'http://18.218.68.157:8000/meetings/'
+// const url = 'http://127.0.0.1:8000/meetings/'
 
 export function* postMeeting(sw, tw) {
-        console.log("Post")
-		console.log(sw)
-        console.log(tw)
+    console.log("Post")
+	console.log(sw)
+    console.log(tw)
+    console.log("Calling get")
+    const getdata = yield call(api.get, url)
+    console.log(getdata)
     const data = yield call(api.post, url, {sinceWhen: sw, tilWhen: tw})
     console.log(data)
     // return data;
