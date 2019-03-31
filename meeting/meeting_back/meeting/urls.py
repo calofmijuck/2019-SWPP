@@ -7,7 +7,6 @@ urlpatterns = [
     path('meetings/<int:pk>/', views.ReservationDetail.as_view()),
     path('users/', views.UserList.as_view()),
     path('users/<int:pk>/', views.UserDetail.as_view()),
-    path('current_user/', views.current_user),
 ]
 
 urlpatterns += [

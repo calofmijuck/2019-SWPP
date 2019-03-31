@@ -6,14 +6,11 @@ const Styledli = styled.li`
   font-family: ${font('primary')};
 `
 
-const Meeting = ({ onClick, sinceWhen, tilWhen, deleted }) => (
+const Meeting = ({ onClick, id, sinceWhen, tilWhen, deleted }) => (
     <Styledli
         onClick={onClick}
-        style={{
-            textDecoration: deleted ? 'line-through' : 'none'
-        }}
     >
-        Reservation: { sinceWhen } ~ { tilWhen }
+        Meeting #{id}: { sinceWhen } ~ { tilWhen }
     </Styledli>
 )
 

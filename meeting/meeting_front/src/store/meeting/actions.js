@@ -10,38 +10,34 @@ export const addMeeting = (sw, tw) => {
     }
 }
 
-// export const editMeeting = (text) => {
-//     return {
-//         type: 'EDIT_MEETING',
-//         id,
-//         text // Also here?
-//     }
-// }
+export const POST_MEETING_REQUEST = 'POST_MEETING_REQUEST'
+export const DEL_MEETING = 'DEL_MEETING'
+export const FETCH_MEETINGS = 'FETCH_MEETINGS'
+export const RESET = 'RESET'
 
-export const delMeeting = (id) => {
+export const delMeeting = (id, usr, pass) => {
     return {
-        type: 'DEL_MEETING',
-        id,
+        type: DEL_MEETING,
+        id, usr, pass
     }
 }
 
-export const POST_MEETING_REQUEST = 'POST_MEETING_REQUEST'
-
-export const FETCH_MEETINGS = 'FETCH_MEETINGS'
-
-export const postMeetingRequest = (sw, tw) => {
-    console.log(sw)
-    console.log(tw)
+export const postMeetingRequest = (sw, tw, usr, pass) => {
     return {
 	type: POST_MEETING_REQUEST,
 	// text
-    sw, tw
+    sw, tw, usr, pass
     }
 }
 
 export const fetchMeetings = () => {
     return {
         type: FETCH_MEETINGS,
+    }
+}
 
+export const reset = () => {
+    return {
+        type: RESET,
     }
 }

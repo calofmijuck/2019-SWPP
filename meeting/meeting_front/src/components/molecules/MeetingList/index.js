@@ -12,7 +12,6 @@ export const MeetingList = ({ meetingliststate = [], onMeetingClick }) => {
         <Styledul>
             { meetingliststate.map(meet =>
                 <Meeting key={meet.id} {...meet}
-                onClick={() => onMeetingClick(meet.id)}
                 />
             )}
         </Styledul>
