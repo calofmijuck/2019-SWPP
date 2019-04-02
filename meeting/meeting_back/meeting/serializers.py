@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class ReservationSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.id')
+    user = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = Reservation

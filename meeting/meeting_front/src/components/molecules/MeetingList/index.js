@@ -9,12 +9,20 @@ const Styledul = styled.ul`
 
 export const MeetingList = ({ meetingliststate = [], onMeetingClick }) => {
     return (
-        <Styledul>
+        <table className="MeetingList">
+        <tbody>
+            <tr className="Header">
+                <td className="ID">ID</td>
+                <td className="User">User</td>
+                <td className="sinceWhen">sinceWhen</td>
+                <td className="tilWhen">tilWhen</td>
+            </tr>
             { meetingliststate.map(meet =>
                 <Meeting key={meet.id} {...meet}
                 />
             )}
-        </Styledul>
+        </tbody>
+        </table>
     )
 }
 

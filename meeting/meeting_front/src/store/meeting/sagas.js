@@ -19,9 +19,11 @@ export function* postMeeting(sw, tw, usr, pass) {
         var s = error.toString()
         s = Number(s.substring(7, 10))
         if(s == 403) {
-            alert("Authentication is not done correctly. Please login again.")
+            alert("Either authentication is not done correctly or you don't have permissions to delete this.")
         } else if(s == 500) {
             alert("Illegal format of time")
+        } else if(s == 400) {
+            alert("Illegal Time")
         }
         console.log(error)
     }
