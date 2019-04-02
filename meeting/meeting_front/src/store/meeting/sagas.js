@@ -3,8 +3,8 @@ import api from 'services/api'
 import * as actions from './actions'
 
 
-const url = 'http://18.218.68.157:8000/meetings/'
-// const url = 'http://127.0.0.1:8000/meetings/'
+// const url = 'http://18.218.68.157:8000/meetings/'
+const url = 'http://127.0.0.1:8000/meetings/'
 
 export function* postMeeting(sw, tw, usr, pass) {
     try {

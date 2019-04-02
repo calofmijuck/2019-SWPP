@@ -7,8 +7,8 @@ import { PageTemplate } from 'components'
 const HomePage = () => {
     return (
         <div>
-            <p> 아 과제 진짜 ... 언제 끝내냐? </p>
-            <Reserve/>
+            <p> <b>Reservation System</b> </p>
+            <Reserve/><br/>
             <MeetingList/>
         </div>
     )

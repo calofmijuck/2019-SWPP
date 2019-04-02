@@ -50,11 +50,11 @@ export const Reserve = ({ statefunction, onAdd, onPost, onFetch, onLogout, onDel
 
     return (
         <div>
-            ID: <input ref={usrname => {usr = usrname;}}/><br/>
+            ID: <input ref={usrname => {usr = usrname;}}/>&nbsp;&nbsp;&nbsp;
             Pass: <input ref={passwd => {pass = passwd;}}/><br/>
             <Button type="submit" onClick={onLoad}>Login/Reload</Button>
             <Button type="submit" onClick={onExit}>Logout</Button><br/><br/>
-            Start : <input ref={sinceWhen => {sw = sinceWhen;}} /> <br/>
+            Start : <input ref={sinceWhen => {sw = sinceWhen;}} />&nbsp;&nbsp;&nbsp;
             End : <input ref={tilWhen => {tw = tilWhen;}} /><br/>
             <Button type="submit" onClick={onSubmit}>Reserve!</Button>
             <Button type="submit" onClick={onPut}>Post Meeting</Button><br/><br/>
