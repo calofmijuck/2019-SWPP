@@ -22,6 +22,8 @@ export function* postMeeting(sw, tw, usr, pass) {
             alert("Either authentication is not done correctly or you don't have permissions to delete this.")
         } else if(s == 500) {
             alert("Illegal format of time")
+        } else if(s == 400) {
+            alert("Illegal Time")
         }
         console.log(error)
     }

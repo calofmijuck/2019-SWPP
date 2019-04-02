@@ -5,13 +5,13 @@ import theme from './themes/default'
 
 injectGlobal`
   body {
-    margin: 0;
+    margin: 10px 0px 10px 0px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   }
   div {
-      width: 100%;
+      width: 90%;
       margin: 0px auto 0px auto;
       align: center;
       text-align: center;
