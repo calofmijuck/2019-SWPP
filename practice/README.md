@@ -117,3 +117,38 @@ serializer.save() # Save - is_valid() must be called beforehand
 serializer = SnippetSerializer(Snippet.objects.all(), many=True) # get all objects
 serializer.data
 ```
+
+### ModelSerializers
+
+- Serializer class replicates lot of information contained in the `Snippet` class
+- Use `ModelSerializers` and set fields to serialize
+
+```python
+class SnippetSerializer(serializers.ModelSerializer):
+    ...
+    class Meta:
+        model = Snippet
+        fields = ['id', 'title', 'code', 'linenos', 'language', 'style']
+```
+
+- Fields can be inspected by printing its representation
+
+```python
+from snippets.serializers import SnippetSerializer
+serializer = SnippetSerializer()
+print(repr(serializer))
+```
+
+### django Views with Serializer
+
+- Write `snippets/views.py`
+- Write `snippets/urls.py`, `tutorial/urls.py`
+
+- Now run the server to test the API
+
+```bash
+python manage.py runserver
+```
+
+- Go to (browser) or curl `localhost:8000/snippets` to get all snippets
+- `localhost:8000/1` to get snippet with id 1
