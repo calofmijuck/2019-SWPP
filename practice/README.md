@@ -63,3 +63,57 @@ INSTALLED_APPS = [
 ### Creating models
 
 - Create model snippet: `snippets/models.py`
+- Sync with database
+
+```bash
+python manage.py makemigrations snippets
+python manage.py migrate
+```
+
+### Serializer class
+
+- Create a serializer for models: `snippets/serializers.py`
+
+  - Declare fields that will be contained when the model data is serialized
+
+- Serialization and Deserialization
+
+```bash
+python manage.py shell
+```
+
+```python
+from snippets.models import Snippet
+from snippets.serializers import SnippetSerializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+
+snippet = Snippet(code='foo = "bar"\n') # Create some snippets
+snippet.save()
+
+snippet = Snippet(code='print("Hello, world!")\n')
+snippet.save()
+
+# Serialization
+
+serializer = SnippetSerializer(snippet) # Serialize
+serializer.data # Check data as python dict
+content = JSONRenderer().render(serializer.data) # Convert to json
+content # Jsonized content
+
+# Deserialization
+import io
+
+stream = io.BytesIO(content)
+data = JSONParser().parse(stream) # Parse the data into python native data type
+
+serializer = SnippetSerializer(data=data) # Conver to model object
+serializer.is_valid() # validation
+serializer.validated_data # Then validated_data is accessible
+serializer.save() # Save - is_valid() must be called beforehand
+
+# Serialization of many objects
+
+serializer = SnippetSerializer(Snippet.objects.all(), many=True) # get all objects
+serializer.data
+```
