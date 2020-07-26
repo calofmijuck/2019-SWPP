@@ -157,3 +157,57 @@ python manage.py runserver
 
 - Modify `snippet/views.py` to use rest_framework `Response` class
   - Also rest_framework provides `status` for status codes
+
+### Class-based Views
+
+- Rewrite `snippet/views.py` to use `APIView`
+  - Functions will be separately defined for each request method
+- Update `snippet/urls.py` to use class-based views
+  - `views.[className].as_view()`
+
+### Using mixins
+
+- Views made even more simple
+  - Common behavior (create/retrieve/update/delete) are implemented in REST framework's mixin classes
+  - Set `query_set` and `serializer` and everything else is done automatically
+
+### Using generic class-based views
+
+- Use appropriate generic views
+
+### Authentication & Permissions
+
+- Associate snippets with a creater (user)
+- Only authenticated users can create/update/delete (its own) snippets
+- Unauthenticated request are read-only
+
+- Add foreign key to model Snippet
+  - Be careful with `related_name`
+- Add serializer for `User` model
+- Update views and urls
+
+- Associating Snippets with Users
+
+  - Override `perform_create` on snippet views, that allows modifications of instance save
+
+- Update serializer
+
+  - `owner` should be set to `ReadOnlyField`, with source `owner.username`
+
+- Add required permission to views
+  - `permission_classes = [] # list of appropriate permission classes`
+
+#### Login to the Browsable API
+
+```python
+from django.conf.urls import include
+
+urlpatterns += [
+    path('api-auth', include('rest_framework.urls')),
+]
+```
+
+### Object level permissions
+
+- Create new file `snippets/permissions.py`
+- Define custom permission (function that returns True/False)
