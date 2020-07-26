@@ -1,10 +1,63 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer
 
 
+@api_view(["GET", "POST"])
+def snippet_list(request):
+    # List all code snippets
+    if request.method == "GET":
+        snippets = Snippet.objects.all()
+        serializer = SnippetSerializer(snippets, many=True)
+        return Response(serializer.data)
+
+    # Create a new snippet
+    elif request.method == "POST":
+        data = JSONParser().parse(request)
+        serializer = SnippetSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["GET", "PUT", "DELETE"])
+def snippet_detail(request, pk):
+    # Retrieve a snippet using pk
+
+    # Find a snippet object
+    try:
+        snippet = Snippet.objects.get(pk=pk)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    # GET: Serialize and return
+    if request.method == "GET":
+        serializer = SnippetSerializer(snippet)
+        return Response(serializer.data)
+
+    # PUT: Update and return
+    elif request.method == "PUT":
+        serializer = SnippetSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    # DELETE: Remove object
+    elif request.method == "DELETE":
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# First draft of class
+"""
 @csrf_exempt
 def snippet_list(request):
     # List all code snippets
@@ -51,3 +104,5 @@ def snippet_detail(request, pk):
     elif request.method == "DELETE":
         snippet.delete()
         return HttpResponse(status=204)  # No content
+"""
+

@@ -152,3 +152,8 @@ python manage.py runserver
 
 - Go to (browser) or curl `localhost:8000/snippets` to get all snippets
 - `localhost:8000/1` to get snippet with id 1
+
+### Requests and Responses
+
+- Modify `snippet/views.py` to use rest_framework `Response` class
+  - Also rest_framework provides `status` for status codes
